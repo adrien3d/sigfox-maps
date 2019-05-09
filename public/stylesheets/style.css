@@ -20,7 +20,7 @@ ul {
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    max-width: 420px;
+    max-width: 630px;
     margin: 0 auto;
     margin-bottom: 3.125em;
     list-style: none;
@@ -48,9 +48,13 @@ li::before {
 }
 
 ul > :first-child::before {
+    background-color: #E3DAF0;
+}
+
+ul > :nth-child(2)::before {
     background-color: #00e4ff;
 }
 
 ul > :last-child::before {
-    background-color: #7E0BFF;
+    background-color: #a9a7a4;
 }
