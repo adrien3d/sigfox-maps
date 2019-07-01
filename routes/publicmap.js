@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 const config = require('../config');
@@ -26,32 +27,32 @@ const countriesToDisplay = _.filter(geoJsonParsed.features, feature => _.find(fi
 router.get('/', function(req, res, next) {
     // Get the public map
     http.get(tokenPublicRetrieval, (sigfoxResponse) => {
-    let buff = "";
-    sigfoxResponse.on('data', d => buff += d);
-    sigfoxResponse.on('end', () => {
-        if (sigfoxResponse.statusCode !== 200) {
-        } else {
-            const publicMapUrl = JSON.parse(buff).tmsTemplateUrl ;
-            // Get the monarch map
-            http.get(tokenMonarchRetrieval, (sigfoxResponse) => {
-                let buff = "";
-                sigfoxResponse.on('data', d => buff += d);
-                sigfoxResponse.on('end', () => {
-                    if (sigfoxResponse.statusCode !== 200) {
-                    } else {
-                        const monarchMapUrl = JSON.parse(buff).tmsTemplateUrl ;
-                        res.render('publicmap', {
-                            title: 'Sigfox public map',
-                            sigfoxMapUrl: publicMapUrl,
-                            sigfoxMonarchMapUrl: monarchMapUrl,
-                            backgroundMap: config.backgroundMap,
-                            countries: JSON.stringify(countriesToDisplay)
-                        });
-                    }
+        let buff = "";
+        sigfoxResponse.on('data', d => buff += d);
+        sigfoxResponse.on('end', () => {
+            if (sigfoxResponse.statusCode !== 200) {
+            } else {
+                const publicMapUrl = JSON.parse(buff).tmsTemplateUrl ;
+                // Get the monarch map
+                http.get(tokenMonarchRetrieval, (sigfoxResponse) => {
+                    let buff = "";
+                    sigfoxResponse.on('data', d => buff += d);
+                    sigfoxResponse.on('end', () => {
+                        if (sigfoxResponse.statusCode !== 200) {
+                        } else {
+                            const monarchMapUrl = JSON.parse(buff).tmsTemplateUrl ;
+                            res.render('publicmap', {
+                                title: 'Sigfox public map',
+                                sigfoxMapUrl: publicMapUrl,
+                                sigfoxMonarchMapUrl: monarchMapUrl,
+                                backgroundMap: config.backgroundMap,
+                                countries: JSON.stringify(countriesToDisplay)
+                            });
+                        }
+                    });
                 });
-            });
-        }
-    })
+            }
+        })
     });
 });
 
