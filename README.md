@@ -1,6 +1,10 @@
 # Sigfox-maps
 
-This project is an example of how to use the Sigfox backend API to display your own maps.
+This project is an example of how to use the Sigfox backend API to display your own maps. 
+
+There are 2 layers demonstrated in this project:
+- `Public map`
+- `Monarch coverage map`
 
 ## Technologies
 
@@ -24,23 +28,25 @@ const config = {
     sigfoxApiPassword: "yourSigfoxApiPassword",
     sigfoxApiSite: "api.sigfox.com",
     publicMapPath: "/v2/tiles/public-coverage",
+    monarchMapPath: "/v2/tiles/monarch",
     https: true,
-    backgroundMap: "https://api.mapbox.com/v4/mapbox.light/{z}/{x}/{y}.png?access_token=[yourToken]"
+    
+    //---- For MapBox background map
+    backgroundMapType: "Basic",
+    backgroundMap: "https://api.mapbox.com/v4/mapbox.light/{z}/{x}/{y}.png?access_token={yourToken}"
 }
 ```
 
 In production situation, you should only set your own credentials to access the Sigfox API and set your background map URL according to your map provider.
+
 The example above showcases a [Mapbox](https://www.mapbox.com/) map with a light style (you'll have to set your own token). To sum up, the `backgroundMap` property expects a TMS URL.
-You can use other background map providers:
-- **Jawg:** `http://tile.jawg.io/jawg-light/{z}/{x}/{y}.png?access-token=[YOUR_ACCESS_TOKEN]`
-- **HERE:** `https://1.base.maps.api.here.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?app_id=[app_id]&app_code=[app_code]`
-- **Google:** Google maps use custom format and should be integrated using a [leaflet plugin](https://gitlab.com/IvanSanchez/Leaflet.GridLayer.GoogleMutant)
-- **Bing:** Bing maps use custom format and should be integrated using a [leaflet plugin](https://github.com/digidem/leaflet-bing-layer)
+You can use other background map providers by switching properties ([Jawg](https://www.jawg.io), [Here](https://developer.here.com/), [Google](https://cloud.google.com/maps-platform) or [Bing](https://www.bingmapsportal.com)).
 
 In test situation, you might want to mock the Sigfox Backend. In order to do this, you can edit the other properties :
 
 - `sigfoxApiSite` to specify the base URL of your mock (including the http(s) prefix)
 - `publicMapPath` to specify the endpoint. To provide a compatible endpoint, check the documentation of the Sigfox API v2
+- `monarchMapPath` to specify the endpoint. To provide a compatible endpoint, check the documentation of the Sigfox API v2
 - `https` to specify if your mock is deployed on https context (set it to true), or http (set it to false)
 
 ## How to run

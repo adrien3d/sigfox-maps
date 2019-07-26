@@ -23,6 +23,8 @@ const filtered = ["AND", "ARE", "ARG", "AUS", "AUT", "BEL", "BRA", "CAN", "CHE",
 const geoJsonParsed = JSON.parse(fs.readFileSync('assets/WorldCountries.geojson'));
 const countriesToDisplay = _.filter(geoJsonParsed.features, feature => _.find(filtered, e => e === feature.properties.ISO_A3) !== undefined);
 
+// from https://snazzymaps.com/style/151/ultra-light-with-labels
+const googleStyle = JSON.parse(fs.readFileSync('assets/google-light-style.json'));
 
 router.get('/', function(req, res, next) {
     // Get the public map
@@ -31,6 +33,13 @@ router.get('/', function(req, res, next) {
         sigfoxResponse.on('data', d => buff += d);
         sigfoxResponse.on('end', () => {
             if (sigfoxResponse.statusCode !== 200) {
+                res.render('error', {
+                    message: 'Impossible to load Public layer',
+                    error: {
+                        status: sigfoxResponse.statusCode,
+                        stack: sigfoxResponse.statusMessage,
+                    }
+                });
             } else {
                 const publicMapUrl = JSON.parse(buff).tmsTemplateUrl ;
                 // Get the monarch map
@@ -45,8 +54,15 @@ router.get('/', function(req, res, next) {
                                 title: 'Sigfox public map',
                                 sigfoxMapUrl: publicMapUrl,
                                 sigfoxMonarchMapUrl: monarchMapUrl,
+                                countries: JSON.stringify(countriesToDisplay),
                                 backgroundMap: config.backgroundMap,
-                                countries: JSON.stringify(countriesToDisplay)
+                                backgroundMapType: config.backgroundMapType,
+                                googleStyle: JSON.stringify(googleStyle),
+                                googleToken: config.googleToken,
+                                hereAppId: config.hereAppId,
+                                hereAppCode: config.hereAppCode,
+                                bingKey: config.bingKey
+
                             });
                         }
                     });
