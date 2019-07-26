@@ -7,7 +7,10 @@ const fs = require('fs');
 const tokenRetrieval = {
     hostname: config.sigfoxApiSite,
     path: config.monarchMapPath,
-    auth: config.sigfoxApiUser + ":" + config.sigfoxApiPassword
+    auth: config.sigfoxApiUser + ":" + config.sigfoxApiPassword,
+    headers: {
+        'Access-Control-Allow-Origin': '*'
+    }
 };
 
 // from https://snazzymaps.com/style/151/ultra-light-with-labels

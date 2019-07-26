@@ -9,13 +9,19 @@ const _ = require('lodash');
 const tokenPublicRetrieval = {
     hostname: config.sigfoxApiSite,
     path: config.publicMapPath,
-    auth: config.sigfoxApiUser + ":" + config.sigfoxApiPassword
+    auth: config.sigfoxApiUser + ":" + config.sigfoxApiPassword,
+    headers: {
+        'Access-Control-Allow-Origin': '*'
+    }
 };
 
 const tokenMonarchRetrieval = {
     hostname: config.sigfoxApiSite,
     path: config.monarchMapPath,
-    auth: config.sigfoxApiUser + ":" + config.sigfoxApiPassword
+    auth: config.sigfoxApiUser + ":" + config.sigfoxApiPassword,
+    headers: {
+        'Access-Control-Allow-Origin': '*'
+    }
 };
 
 const filtered = ["AND", "ARE", "ARG", "AUS", "AUT", "BEL", "BRA", "CAN", "CHE", "CHL", "COL", "CRI", "CZE", "DEU", "DNK", "ECU", "ESP", "EST", "FIN", "FRA", "GBR", "GTM", "HKG", "HND", "HRV", "HUN", "IRL", "IRN", "ITA", "JPN", "KEN", "KOR", "LIE", "LUX", "MEX", "MLT", "MUS", "MYS", "NCL", "NLD", "NOR", "NZL", "OMN", "PAN", "PER", "PRI", "PRT", "PYF", "ROU", "SGP", "SLV", "SVK", "SWE", "THA", "TUN", "TWN", "URY", "USA", "ZAF"];
