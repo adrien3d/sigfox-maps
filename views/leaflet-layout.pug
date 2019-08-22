@@ -50,7 +50,7 @@ html
             const map = L.map('mapid', {
                 fullscreenControl: true,
                 zoomControl: true,
-                maxZoom: 11,
+                maxZoom: 20,
                 minZoom: 4,
                 worldCopyJump: true
             }).setView([44, 0], 3);
@@ -68,39 +68,39 @@ html
                 L.gridLayer.googleMutant({
                     type: 'roadmap',
                     styles: googleStyle,
-                    maxZoom: 11
+                    maxZoom: 20
                 }).addTo(map);
             } if ("Here" == backgroundMapType) {
                 L.tileLayer.here({
                     scheme: 'reduced.day',
                     appId: hereAppId,
                     appCode: hereAppCode,
-                    maxZoom: 11}).addTo(map);
+                    maxZoom: 20}).addTo(map);
             } if ("Bing" == backgroundMapType) {
                 L.tileLayer.bing({
                     bingMapsKey: bingKey,
                     imagerySet: "CanvasLight",
-                    maxZoom: 11}).addTo(map);
+                    maxZoom: 20}).addTo(map);
             } else {
                 L.tileLayer(backgroundMapUrl,{
-                    maxZoom: 11
+                    maxZoom: 20
                 }).addTo(map);
             }
             L.geoJSON(countries, style_countries).addTo(map);
             L.tileLayer(sigfoxMapUrl,{
                 zoomOffset: 0,
-                maxZoom: 11,
-                maxNativeZoom: 11,
+                maxZoom: 20,
+                maxNativeZoom: 20,
                 zIndex: 500,
-                opacity: 0.7,
+                opacity: 0.3,
                 attribution: ' <a href="https://sigfox.com">sigfox</a>'
             }).addTo(map);
             L.tileLayer(sigfoxMonarchMapUrl,{
                 zoomOffset: 0,
-                maxZoom: 11,
-                maxNativeZoom: 11,
+                maxZoom: 20,
+                maxNativeZoom: 20,
                 zIndex: 500,
-                opacity: 0.7,
+                opacity: 0.5,
                 attribution: ' <a href="https://sigfox.com">sigfox</a>'
             }).addTo(map);
 
