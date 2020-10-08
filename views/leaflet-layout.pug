@@ -83,7 +83,9 @@ html
                     maxZoom: 20}).addTo(map);
             } else {
                 L.tileLayer(backgroundMapUrl,{
-                    maxZoom: 20
+                    maxZoom: 20,
+                    tileSize: 512,
+                    zoomOffset: -1
                 }).addTo(map);
             }
             L.geoJSON(countries, style_countries).addTo(map);

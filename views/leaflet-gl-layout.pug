@@ -82,7 +82,9 @@ html
                     maxZoom: 11}).addTo(map);
             } else {
                 L.tileLayer(backgroundMapUrl,{
-                    maxZoom: 11
+                    maxZoom: 20,
+                    tileSize: 512,
+                    zoomOffset: -1
                 }).addTo(map);
             }
             L.tileLayer.gl({
